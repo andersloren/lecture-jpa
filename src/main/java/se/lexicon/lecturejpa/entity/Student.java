@@ -41,6 +41,11 @@ public class Student {
     private boolean status;
     private LocalDateTime createDate;
 
+    @Setter
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
+
     public Student(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
