@@ -38,22 +38,24 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public Collection<Student> findByNameContains(String name) {
-        // TODO: 17/10/2023 implement later
-        return null;
+    public Collection<Student> findByFirstNameContains(String firstName) {
+        return entityManager.createQuery("select s from Student s where s.firstName like :fn", Student.class)
+                .setParameter("fn", "%" + firstName + "%")
+                .getResultList();
     }
 
     @Override
     public Collection<Student> findAll() {
         return entityManager.createQuery("select s from Student s", Student.class)
-                .getResultList();
+                .getResultList()
+                .stream()
+                .toList();
     }
 
     @Override
     @Transactional //use when we want to write to database, but not required when we try to only read to
     public void update(Student student) {
         entityManager.merge(student);
-
     }
 
     @Override
@@ -62,10 +64,7 @@ public class StudentDaoImpl implements StudentDao {
         Student foundStudent = entityManager.find(Student.class, id);
         if (foundStudent != null) {
             entityManager.remove(foundStudent);
-        }
-        // TODO: 17/10/2023 throws exception
+        } else throw new NullPointerException("Student did not exist!");
     }
-
-
 }
 

@@ -15,16 +15,12 @@ import java.time.LocalDateTime;
 @Entity
 public class Student {
 
-
-
-
     @Id //jakarta
-//    @GeneratedValue(generator = "UUID")
-//    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator") //needed to have UUID id
-    // TODO: 17/10/2023 ask mehrdad why this didn't work!
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //IDENTITY means auto increment??
-    private Integer id;
+//    @GeneratedValue(strategy = GenerationType.IDENTITY) //IDENTITY means auto increment??
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 
+    private String id; //needed to have UUID id
 
     @Column(nullable = false, length = 100)
     @Setter
