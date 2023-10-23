@@ -38,7 +38,7 @@ public class Student {
     private LocalDateTime createDate;
 
     @Setter
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "address_id")
     private Address address;
 
