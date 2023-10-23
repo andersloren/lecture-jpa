@@ -25,7 +25,12 @@ public interface StudentRepository extends JpaRepository<Student, String> {
 
     // update student set status = true where id = :id
     @Modifying
-    @Query("UPDATE s Student s set s.status = true where s.id = :id") // Note that UPDATE is first1
+    @Query("UPDATE Student s set s.status = true where s.id = :id") // Note that UPDATE is first1
     void updateStudentStatusToTrue(@Param("id") String id);
+
+    List<Student> findByCourses_Id(Long courseId);
+
+    List<Student> findByCourses_CourseNameContains(String courseName);
+
 
 }
