@@ -5,6 +5,8 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @AllArgsConstructor
@@ -42,11 +44,25 @@ public class Student {
     @JoinColumn(name = "address_id")
     private Address address;
 
+    @OneToMany
+    private Set<Course> courses = new HashSet<>();
+
     public Student(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.status = true;
         this.createDate = LocalDateTime.now();
+    }
+
+    // ?
+    private void addCourse(Course course) {
+        courses.add(course);
+        course.setStudent(this);
+    }
+
+    public void removeCourse(Course course) {
+        courses.remove(course);
+        course.setStudent(null);
     }
 }
