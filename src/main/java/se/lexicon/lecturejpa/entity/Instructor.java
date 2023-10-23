@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -19,11 +22,13 @@ public class Instructor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
     private Long id;
+    private String name;
 
-    @Column(nullable = false, length = 100)
-    private String courseName;
 
-    public Instructor(String courseName) {
-        this.courseName = courseName;
+    @ManyToMany(mappedBy = "instructors")
+    private Set<Course> courses = new HashSet<>();
+
+    public Instructor(String name) {
+        this.name = name;
     }
 }

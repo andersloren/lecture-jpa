@@ -37,7 +37,6 @@ public class Course {
     )
     private Set<Instructor> instructors = new HashSet<>();
 
-
     public Course(String courseName) {
         this.courseName = courseName;
     }
